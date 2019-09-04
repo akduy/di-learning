@@ -1,24 +1,10 @@
-function GetRandomArray(count) {
-    var temp = [];
-    for (let index = 0; index < count; index++) {
-        var value = Math.ceil((Math.random() * 100));
-        temp.push(value);
-    }
-    return temp;
-}
+import  {getRandomArray}  from 'helper';
+// import  printArray  from 'helper.js';
 
-function PrintArray(arr) {
-    let str = "";
-    for (let index = 0; index < arr.length; index++) {
-        const element = arr[index];
-        str = str.concat("[" + element + "].");
-    }
-    console.log(str);
-}
 
 function Partition(arr, low, high) {
     console.log("-----BEFORE PARTITION-----");
-    PrintArray(arr);
+    printArray(arr);
 
     var pivotIndex = high;
     var pivot = arr[pivotIndex];
@@ -35,7 +21,7 @@ function Partition(arr, low, high) {
             arr[left] = temp;
 
             console.log("--STOP PARTITION--");
-            PrintArray(arr);
+            printArray(arr);
             console.log("\n\n");
             return left;
         }
@@ -58,7 +44,7 @@ function Partition(arr, low, high) {
 
             console.log("left ater swap: " + left + "-right after swap: " + right);
             console.log("--array after swap: ");
-            PrintArray(arr);
+            printArray(arr);
             console.log("\n");
         }
     }
@@ -76,7 +62,7 @@ function QuickSort(arr, low, high) {
     }
 }
 
-// arr = GetRandomArray(10);
-arr = [95, 95, 35, 83, 35, 97, 95, 91, 97, 40];
+arr = getRandomArray(10);
+// arr = [95, 95, 35, 83, 35, 97, 95, 91, 97, 40];
 QuickSort(arr, 0, arr.length - 1);
-PrintArray(arr);
+printArray(arr);
