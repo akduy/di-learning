@@ -1,6 +1,6 @@
-export { getRandomArray, printArray };
+//export { getRandomArray, printArray };
 
-let getRandomArray = function (count) {
+export const getRandomArray = function (count) {
     var temp = [];
     for (let index = 0; index < count; index++) {
         var value = Math.ceil((Math.random() * 100));
@@ -9,7 +9,7 @@ let getRandomArray = function (count) {
     return temp;
 }
 
-let printArray = function (arr) {
+export const printArray = function (arr) {
     let str = "";
     for (let index = 0; index < arr.length; index++) {
         const element = arr[index];
