@@ -18,7 +18,10 @@ public class GridController : CustomSingleton<GridController>
         base.Awake();
     }
 
-
+    public CellController GetCell(Vector2 position)
+    {
+        return cellsDictionary[position];
+    }
 
     void Start()
     {
@@ -103,25 +106,6 @@ public class GridController : CustomSingleton<GridController>
         }
         return null;
     }
-    // y = 3 => x = 2.5
-    // y = 2 => x = 2.5
-    // y = 1 => x = 3
-    // y = 0 => x = 3
-    // private bool CheckValidate(Vector2 ele, Vector2 gPos)
-    // {
-    //     var x = ele.x;
-    //     var y = ele.y;
-
-    //     var limX = (Mathf.Abs(y) * -0.2f) + 3.05f;
-    //     this.Log(limX);
-    //     // this.Log(Math.Round(limX, MidpointRounding.AwayFromZero) / 2);
-    //     if (-limX <= x && x <= limX
-    //         && -GridController.instance.height <= ele.y && ele.y <= GridController.instance.height)
-    //     {
-    //         return true;
-    //     }
-    //     return false;
-    // }
 
     public CellController GetAdjacentPosition(Vector2 gPos)
     {
@@ -139,7 +123,6 @@ public class GridController : CustomSingleton<GridController>
 
     public List<CellController> GetAdjacentCells(Vector2 gPos)
     {
-        this.Log("finder pos: " + gPos);
         var result = new List<CellController>();
         Vector2[] arr = {
             new Vector2(gPos.x - 1, gPos.y),

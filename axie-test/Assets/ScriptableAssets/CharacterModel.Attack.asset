@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67558e6507e3eb44da49968f7b1d1f92, type: 3}
   m_Name: CharacterModel.Attack
   m_EditorClassIdentifier: 
+  type: 0
   movable: 1
-  startHP: 30
+  startHP: 10

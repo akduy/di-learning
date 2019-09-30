@@ -65,19 +65,24 @@
      <Compile Include="Assets\Scripts\AttackCharacter.cs" />
      <Compile Include="Assets\Scripts\CellController.cs" />
      <Compile Include="Assets\Scripts\Character.cs" />
+     <Compile Include="Assets\Scripts\CharacterHPBar.cs" />
      <Compile Include="Assets\Scripts\CharacterModel.cs" />
      <Compile Include="Assets\Scripts\DefenseCharacter.cs" />
-     <Compile Include="Assets\Scripts\DFS.cs" />
+     <Compile Include="Assets\Scripts\DragAndZoom.cs" />
+     <Compile Include="Assets\Scripts\FPSDisplay.cs" />
      <Compile Include="Assets\Scripts\GameConstants.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\GridController.cs" />
+     <Compile Include="Assets\Scripts\IHitable.cs" />
      <Compile Include="Assets\Scripts\Miscellaneous\CircleLayoutGroup.cs" />
      <Compile Include="Assets\Scripts\Miscellaneous\CustomSingleton.cs" />
      <Compile Include="Assets\Scripts\Miscellaneous\ExtensionMethods.cs" />
      <Compile Include="Assets\Scripts\Miscellaneous\Observer_EventData.cs" />
      <Compile Include="Assets\Scripts\Miscellaneous\Observer_EventDispatcher.cs" />
      <Compile Include="Assets\Scripts\Miscellaneous\Observer_EventID.cs" />
+     <Compile Include="Assets\Scripts\PowerBar.cs" />
      <Compile Include="Assets\Scripts\Test.cs" />
+     <Compile Include="Assets\Scripts\UIController.cs" />
      <Compile Include="Assets\Shapes2D\Scripts\PolyMap.cs" />
      <Compile Include="Assets\Shapes2D\Scripts\Shape.cs" />
      <Compile Include="Assets\Shapes2D\Scripts\Shapes2DPrefs.cs" />
@@ -431,6 +436,9 @@
  <Reference Include="nunit.framework">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.3f1/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
  </Reference>
+ <Reference Include="DOTween">
+ <HintPath>E:/Projects/axie-test-resources/axie-test/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
+ </Reference>
  <Reference Include="Unity.Analytics.Editor">
  <HintPath>E:/Projects/axie-test-resources/axie-test/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
  </Reference>
@@ -439,9 +447,6 @@
  </Reference>
  <Reference Include="Unity.Analytics.Tracker">
  <HintPath>E:/Projects/axie-test-resources/axie-test/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
- </Reference>
- <Reference Include="DOTween">
- <HintPath>E:/Projects/axie-test-resources/axie-test/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
  </Reference>
  <Reference Include="netstandard">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.3f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

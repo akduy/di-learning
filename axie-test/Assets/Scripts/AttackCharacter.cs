@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using DG.Tweening;
+using Random = UnityEngine.Random;
 
 public class AttackCharacter : Character
 {
@@ -9,6 +10,9 @@ public class AttackCharacter : Character
         var enemy = GridController.instance.GetAdjacentEnemy(gridPosition, CharacterModel.CHARACTER_TYPE.DEFENSE);
         if (enemy != null)
         {
+            var enemyPosition = enemy.gridPosition;
+            var enemyCell = GridController.instance.GetCell(enemyPosition);
+            enemyCell.HighLight();
             Attack(enemy);
         }
         else
@@ -22,6 +26,7 @@ public class AttackCharacter : Character
                 {
                     GridController.instance.RemoveCharacterFromCell(gridPosition);
                     targetCell.character = this;
+                    targetCell.HighLight();
                     this.gridPosition = targetCell.gridPosition;
                     this.name = "character[" + gridPosition.x + "." + gridPosition.y + "]";
                     MoveTo(targetCell);
@@ -31,24 +36,27 @@ public class AttackCharacter : Character
             {
                 canClick = true;
                 // StayIdle();
+                SetAnimOnClick();
             }
         }
     }
 
     private void MoveTo(CellController targetCell)
     {
+        SetAnimMove();
         transform.DOMove(targetCell.transform.position, 1.5f).OnComplete(() =>
         {
             canClick = true;
-            // targetCell.character = this;
-            // this.gridPosition = targetCell.gridPosition;
-            // this.name = "character[" + gridPosition.x + "." + gridPosition.y + "]";
+            SetAnimIdle();
         });
     }
 
-    private void Attack(Character enemy)
-    {
-        this.Log("attacking");
-        Destroy(enemy.gameObject);
-    }
+    // private void Attack(Character enemy)
+    // {
+    //     this.Log("attacking");
+    //     SetAnimAttack();
+    //     var randomPoint = Random.Range(0, 2);
+    //     enemy.GetComponent<IHitable>().GetHit(randomPoint);
+    //     canClick = true;
+    // }
 }

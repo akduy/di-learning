@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using static GameConstants;
 
@@ -9,6 +10,7 @@ public class CellController : MonoBehaviour
     public int circleIndex;
     public Character character;
     public Vector2 gridPosition;
+    [SerializeField] SpriteRenderer sprite;
 
     void Start()
     {
@@ -38,5 +40,10 @@ public class CellController : MonoBehaviour
 
         // this.Log("i: " + i + ".j: " + j);
         // circleIndex = (new Vector2Int(i, j).magnitude);
+    }
+
+    public void HighLight()
+    {
+        sprite.DOColor(Color.red, 0.5f).SetLoops(2, LoopType.Yoyo);
     }
 }

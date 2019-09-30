@@ -5,9 +5,23 @@ using UnityEngine;
 
 public class GameController : CustomSingleton<GameController>
 {
+    public enum GAME_STATE
+    {
+        PREPARE, PLAY, END
+    }
+
+    public enum GAME_TURN
+    {
+        ATTACK, DEFENSE
+    }
+    public GAME_STATE state;
+    public GAME_TURN turn;
     [SerializeField] Transform charactersContainer;
+
     [SerializeField] Character defenseCharacterPrefab, attackCharacterPrefab;
     List<Character> defenseList, attackList;
+    const float speedUpGamePerClick = 2f;
+    const float maxSpeedUpGame = 6f;
 
     public override void Awake()
     {
@@ -16,6 +30,45 @@ public class GameController : CustomSingleton<GameController>
 
         this.RegisterListener(EventID.ON_GRID_HAS_INIT, param => OnGridHasInit());
         base.Awake();
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+    }
+
+    public void SpeedUpGame()
+    {
+        Time.timeScale *= speedUpGamePerClick;
+        if (Time.timeScale >= maxSpeedUpGame)
+        {
+            Time.timeScale = 1;
+        }
+    }
+
+    public float GetTotalDefenseHP()
+    {
+        var result = 0f;
+        for (int i = 0; i < defenseList.Count; i++)
+        {
+            result += defenseList[i].model.startHP;
+        }
+        return result;
+    }
+
+    public float GetTotalAttackHP()
+    {
+        var result = 0f;
+        for (int i = 0; i < attackList.Count; i++)
+        {
+            result += attackList[i].model.startHP;
+        }
+        return result;
     }
 
     public Character FindClosestEnemyToMove(Vector3 position)
@@ -30,7 +83,6 @@ public class GameController : CustomSingleton<GameController>
                 if (adjacentCells[j].character == null)
                 {
                     availableCharacters.Add(ele);
-                    break;
                 }
             }
         }
@@ -54,9 +106,8 @@ public class GameController : CustomSingleton<GameController>
     private void OnGridHasInit()
     {
         defenseList = SpawnCharacter(defenseCharacterPrefab, 1);
-        // SpawnCharacter(attackCharacterPrefab, 1);
-        // SpawnCharacter(attackCharacterPrefab, 2);
         attackList = SpawnCharacter(attackCharacterPrefab, 3);
+        PowerBar.instance.Init(GetTotalDefenseHP(), GetTotalAttackHP());
     }
 
     private void Start()
@@ -90,5 +141,31 @@ public class GameController : CustomSingleton<GameController>
         return result;
     }
 
+    public void RemoveCharacter(Character character, CharacterModel.CHARACTER_TYPE type)
+    {
+        if (type == CharacterModel.CHARACTER_TYPE.DEFENSE)
+        {
+            defenseList.Remove(character);
+        }
+        if (type == CharacterModel.CHARACTER_TYPE.ATTACK)
+        {
+            attackList.Remove(character);
+        }
+        if (attackList.Count == 0 || defenseList.Count == 0)
+        {
+            EndGame(type);
+        }
+    }
 
+    private void EndGame(CharacterModel.CHARACTER_TYPE loser)
+    {
+        state = GAME_STATE.END;
+        UIController.instance.ShowEndPanel(loser);
+    }
+
+    public void StartGame()
+    {
+        state = GAME_STATE.PLAY;
+        turn = GAME_TURN.ATTACK;
+    }
 }
